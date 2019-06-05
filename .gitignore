@@ -1,3 +1,4 @@
 *.suo
 bin/
 obj/
+/Codealot/.vs/Codealot/v16/Server/sqlite3
