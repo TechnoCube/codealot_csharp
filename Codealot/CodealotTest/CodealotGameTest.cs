@@ -51,5 +51,104 @@ namespace UnitTest
             // Assert
             Assert.AreEqual(customAmount, target.Knights.Count);
         }
+
+        /// <summary>
+        /// Tests that if three knights are above the bonus threshold, those three knights gain three bonus xp
+        /// </summary>
+        [TestMethod]
+        public void GrantBonusXp_ThreeKnightsAchieveBonus_ExpectThreeBonusXpAwarded()
+        {
+            // Arrange
+            var target = new CodealotGame();
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 3)
+                {
+                    target.Knights[i].SetXp(5);
+                }
+            }
+
+            // Act
+            target.GrantBonusXp();
+
+            // Assert
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 3)
+                {
+                    Assert.AreEqual(8, target.Knights[i].GetXp());
+                }
+                else
+                {
+                    Assert.AreEqual(0, target.Knights[i].GetXp());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Tests that if five knights are above the bonus threshold, those five knights gain five bonus xp
+        /// </summary>
+        [TestMethod]
+        public void GrantBonusXp_FiveKnightsAchieveBonus_ExpectFiveBonusXpAwarded()
+        {
+            // Arrange
+            var target = new CodealotGame();
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 5)
+                {
+                    target.Knights[i].SetXp(5);
+                }
+            }
+
+            // Act
+            target.GrantBonusXp();
+
+            // Assert
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 5)
+                {
+                    Assert.AreEqual(10, target.Knights[i].GetXp());
+                }
+                else
+                {
+                    Assert.AreEqual(0, target.Knights[i].GetXp());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Tests that if eight knights are above the bonus threshold, those eight knights gain eight bonus xp
+        /// </summary>
+        [TestMethod]
+        public void GrantBonusXp_EightKnightsAchieveBonus_ExpectEightBonusXpAwarded()
+        {
+            // Arrange
+            var target = new CodealotGame();
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 8)
+                {
+                    target.Knights[i].SetXp(5);
+                }
+            }
+
+            // Act
+            target.GrantBonusXp();
+
+            // Assert
+            for (int i = 0; i < 12; i++)
+            {
+                if (i < 8)
+                {
+                    Assert.AreEqual(13, target.Knights[i].GetXp());
+                }
+                else
+                {
+                    Assert.AreEqual(0, target.Knights[i].GetXp());
+                }
+            }
+        }
     }
 }
