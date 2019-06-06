@@ -53,8 +53,9 @@
     <Compile Include="BasicCodalot.cs" />
     <Compile Include="Codalot.cs" />
     <Compile Include="KnightPosition.cs" />
-    <Compile Include="CodealotTest.cs" />
+    <Compile Include="CodealotGameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="KnightTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codealot\Codealot.csproj">

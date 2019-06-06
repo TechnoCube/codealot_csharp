@@ -15,54 +15,80 @@ namespace Codealot
             stamina = 0;
         }
 
-        public int getXp()
+        /// <summary>
+        /// Performs the appropriate actions for a knight depending on its location and stamina level
+        /// </summary>
+        public void ProcessHour()
+        {
+            // Increment stamina by 1 if the knight is in the tavern
+            if (IsInTavern())
+            {
+                IncrementStamina(1);
+            }
+            // If the knight is in the training yard and has stamina to train, increment xp and decrement stamina
+            else if (IsInTrainingYard() && GetStamina() > 0)
+            {
+                IncrementStamina(-1);
+                IncrementXp(1);
+            }
+        }
+
+        public int GetXp()
         {
             return xp;
         }
 
-        public void setXp(int xp)
+        public void SetXp(int xp)
         {
             this.xp = xp;
         }
 
-        public void incrementXp(int xp)
+        public void IncrementXp(int xp)
         {
             this.xp += xp;
         }
 
-        public int getStamina()
+        public int GetStamina()
         {
             return stamina;
         }
 
-        public void setStamina(int stamina)
+        public void SetStamina(int stamina)
         {
             this.stamina = stamina;
         }
 
-        public void incrementStamina(int stamina)
+        public void IncrementStamina(int stamina)
         {
             this.stamina += stamina;
         }
 
-        public bool isInTavern()
+        /// <summary>
+        /// Moves the knight to the tavern and out of all other locations
+        /// </summary>
+        public void MoveToTavern()
+        {
+            is_InTavern = true;
+            is_InTrainingYard = false;
+        }
+
+        /// <summary>
+        /// Moves the knight to the training yard and out of all other locations
+        /// </summary>
+        public void MoveToTrainingYard()
+        {
+            is_InTrainingYard = true;
+            is_InTavern = false;
+        }
+
+        public bool IsInTavern()
         {
             return this.is_InTavern;
-        }
+        }        
 
-        public void setInTavern(bool isInTavern)
-        {
-            this.is_InTavern = isInTavern;
-        }
-
-        public bool isInTrainingYard()
+        public bool IsInTrainingYard()
         {
             return this.is_InTrainingYard;
-        }
-
-        public void setInTrainingYard(bool isInTrainingYard)
-        {
-            this.is_InTrainingYard = isInTrainingYard;
-        }
+        }        
     }
 }

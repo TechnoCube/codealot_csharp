@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Codealot;
 
 namespace UnitTest
 {
     [TestClass]
-    public class CodealotTest
+    public class CodealotGameTest
     {
         // TODO: Determine if this test is valueable... it seems at first glance to be testing a completely 
         // fake implementation not utilized in the main game    
@@ -31,10 +32,10 @@ namespace UnitTest
         public void DefaultKnightAmountTest_Expect12()
         {
             // Arrange / Act
-            var target = new Codealot.Codalot();
+            var target = new CodealotGame();
 
             // Assert
-            Assert.IsTrue(target.Knights.Count == 12);
+            Assert.AreEqual(12, target.Knights.Count);
         }
 
         /// <summary>
@@ -45,10 +46,10 @@ namespace UnitTest
         {
             // Arrange / Act
             var customAmount = 20;
-            var target = new Codealot.Codalot(customAmount);
+            var target = new CodealotGame(customAmount);
 
             // Assert
-            Assert.IsTrue(target.Knights.Count == customAmount);
+            Assert.AreEqual(customAmount, target.Knights.Count);
         }
     }
 }

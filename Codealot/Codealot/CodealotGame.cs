@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Codealot
 {
-    public class Codalot
+    public class CodealotGame
     {
         // TODO: Move all knight logic internal so Main won't need access to them
         private ArrayList knights;
@@ -15,7 +15,7 @@ namespace Codealot
         /// <summary>
         /// Default constructor, creates a game with 12 knights
         /// </summary>
-        public Codalot()
+        public CodealotGame()
         {
             this.knights = new ArrayList();
             for (int i = 0; i < 12; ++i)
@@ -28,42 +28,21 @@ namespace Codealot
         /// Constructor for custom amount of knights
         /// </summary>
         /// <param name="numberOfKnights"></param>
-        public Codalot(int numberOfKnights)
+        public CodealotGame(int numberOfKnights)
         {
             this.knights = new ArrayList();
             for (int i = 0; i < numberOfKnights; ++i)
             {
                 knights.Add(new Knight());
             }
-        }                
+        } 
 
-        public void addKnightToTrainingYard(Knight knight)
-        {
-            knight.setInTrainingYard(true);
-            knight.setInTavern(false);
-        }
-
-        public void addKnightToTavern(Knight knight)
-        {         
-            knight.setInTavern(true);
-            knight.setInTrainingYard(false);
-        }
-
-        public void process()
-        {
-            foreach (Knight knight in this.knights)
-            {
-                knight.incrementStamina(knight.isInTavern() ? 1 : -1);
-                knight.incrementXp(knight.isInTrainingYard() ? 1 : 0);
-            }
-        }
-
-        public void grantBonusXp()
+        public void GrantBonusXp()
         {
             int bonusKnights = 0;
             foreach (Knight knight in this.knights)
             {
-                if (knight.getXp() >= 3)
+                if (knight.GetXp() >= 3)
                 {
                     bonusKnights++;
                 }
@@ -72,9 +51,9 @@ namespace Codealot
             {
                 foreach (Knight knight in this.knights)
                 {
-                    if (knight.getXp() >= 3)
+                    if (knight.GetXp() >= 3)
                     {
-                        knight.setXp(knight.getXp() + 5);
+                        knight.SetXp(knight.GetXp() + 5);
                     }
                 }
             }
@@ -82,9 +61,9 @@ namespace Codealot
             {
                 foreach (Knight knight in this.knights)
                 {
-                    if (knight.getXp() >= 3)
+                    if (knight.GetXp() >= 3)
                     {
-                        knight.setXp(knight.getXp() + 10);
+                        knight.SetXp(knight.GetXp() + 10);
                     }
                 }
             }
@@ -92,9 +71,9 @@ namespace Codealot
             {
                 foreach (Knight knight in this.knights)
                 {
-                    if (knight.getXp() >= 3)
+                    if (knight.GetXp() >= 3)
                     {
-                        knight.setXp(knight.getXp() + 20);
+                        knight.SetXp(knight.GetXp() + 20);
                     }
                 }
             }
