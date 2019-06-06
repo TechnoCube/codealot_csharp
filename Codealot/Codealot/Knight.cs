@@ -6,13 +6,15 @@ namespace Codealot
     {
         private int xp;
         private int stamina;
-        private bool is_InTavern;
-        private bool is_InTrainingYard;
+        private bool isInTavern;
+        private bool isInTrainingYard;
+        private bool isExhausted;
 
         public Knight()
         {
             xp = 0;
-            stamina = 0;
+            stamina = 3;
+            isExhausted = false;
         }
 
         /// <summary>
@@ -25,11 +27,10 @@ namespace Codealot
             {
                 IncrementStamina(1);
             }
-            // If the knight is in the training yard and has stamina to train, increment xp and decrement stamina
-            else if (IsInTrainingYard() && GetStamina() > 0)
+            // Train the knight if it is in the training yard
+            else if (IsInTrainingYard())
             {
-                IncrementStamina(-1);
-                IncrementXp(1);
+                train();
             }
         }
 
@@ -68,8 +69,8 @@ namespace Codealot
         /// </summary>
         public void MoveToTavern()
         {
-            is_InTavern = true;
-            is_InTrainingYard = false;
+            isInTavern = true;
+            isInTrainingYard = false;
         }
 
         /// <summary>
@@ -77,18 +78,43 @@ namespace Codealot
         /// </summary>
         public void MoveToTrainingYard()
         {
-            is_InTrainingYard = true;
-            is_InTavern = false;
+            isInTrainingYard = true;
+            isInTavern = false;
         }
 
         public bool IsInTavern()
         {
-            return this.is_InTavern;
+            return this.isInTavern;
         }        
 
         public bool IsInTrainingYard()
         {
-            return this.is_InTrainingYard;
-        }        
+            return this.isInTrainingYard;
+        }
+
+        public bool IsExhausted()
+        {
+            return this.isExhausted;
+        }
+
+        /// <summary>
+        /// Process the knight's action if they are in the training yard
+        /// </summary>
+        private void train()
+        {
+            // If the knight tries to train with 0 stamina, it becomes exhausted and loses all xp
+            if (stamina == 0)
+            {
+                SetXp(0);
+                isExhausted = true;
+            }
+
+            // If the knight is not exhausted and has stamina, train normally
+            else if (!isExhausted)
+            {
+                IncrementStamina(-1);
+                IncrementXp(1);
+            }
+        }
     }
 }

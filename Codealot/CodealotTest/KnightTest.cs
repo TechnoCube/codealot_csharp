@@ -8,21 +8,46 @@ namespace UnitTest
     public class KnightTest
     {
         /// <summary>
-        /// Tests that no XP is earned when stamina is zero and that stamina is not reduced below zero
+        /// Tests that no XP is earned when stamina is zero and that stamina is not reduced below zero.
+        /// The knight should become exhausted for attempting to train with zero stamina, reducing xp to zero
         /// </summary>
         [TestMethod]
-        public void ProcessHour_InTrainingYardZeroStamina_ExpectNoXpEarned()
+        public void ProcessHour_InTrainingYardZeroStamina_ExpectKnightIsExhaustedAndXpReducedToZero()
         {
             // Arrange
             var target = new Knight();
+            target.SetXp(5);
+            target.SetStamina(0);
             target.MoveToTrainingYard();
 
             // Act
             target.ProcessHour();
 
             // Assert
+            Assert.IsTrue(target.IsExhausted());
             Assert.AreEqual(0, target.GetXp());
             Assert.AreEqual(0, target.GetStamina());
+        }
+
+        /// <summary>
+        /// Tests that no XP is earned when the knight is exhausted
+        /// </summary>
+        [TestMethod]
+        public void ProcessHour_InTrainingYardAndExhausted_ExpectKnightEarnsNoXp()
+        {
+            // Arrange
+            var target = new Knight();
+            target.MoveToTrainingYard();
+            target.SetStamina(0);
+            target.ProcessHour();
+            target.SetStamina(1);
+
+            // Act
+            target.ProcessHour();
+
+            // Assert
+            Assert.IsTrue(target.IsExhausted());
+            Assert.AreEqual(0, target.GetXp());
         }
 
         /// <summary>
@@ -34,7 +59,7 @@ namespace UnitTest
             // Arrange
             var target = new Knight();
             target.MoveToTrainingYard();
-            target.IncrementStamina(1);
+            target.SetStamina(1);
 
             // Act
             target.ProcessHour();
@@ -53,6 +78,7 @@ namespace UnitTest
             // Arrange
             var target = new Knight();
             target.MoveToTavern();
+            target.SetStamina(0);
 
             // Act
             target.ProcessHour();
